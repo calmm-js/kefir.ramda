@@ -1,7 +1,7 @@
 # <a id="kefir-ramda"></a> Kefir Ramda &middot; [![Gitter](https://img.shields.io/gitter/room/calmm-js/chat.js.svg)](https://gitter.im/calmm-js/chat) [![GitHub stars](https://img.shields.io/github/stars/calmm-js/kefir.ramda.svg?style=social)](https://github.com/calmm-js/kefir.ramda)
 
-[Ramda](http://ramdajs.com/) lifted to work with
-[Kefir](https://kefirjs.github.io/kefir/) observables.
+[Ramda](http://ramdajs.com/) functions lifted to work on
+[Kefir](https://kefirjs.github.io/kefir/) properties.
 
 [![npm version](https://badge.fury.io/js/kefir.ramda.svg)](http://badge.fury.io/js/kefir.ramda)
 [![Build Status](https://travis-ci.org/calmm-js/kefir.ramda.svg?branch=master)](https://travis-ci.org/calmm-js/kefir.ramda)
