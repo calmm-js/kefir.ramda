@@ -42,6 +42,9 @@ describe('Lifted Ramda', () => {
   testEq(3, () => R.add(1)(C(2)))
   testEq(3, () => R.add(C(1), C(2)))
 
+  testEq(-1, () => R.pipe(x => x - 1, x => -x)(C(2)))
+  testEq(-1, () => R.apply(R.pipe(R.add(R.__, C(-1)), x => -x), [C(2)]))
+
   testEq([1, 1], () => R.filter(R.gt(C(2)), C([3, 1, 4, 1])))
   testEq([3, 4], () => R.filter(R.gt(R.__, C(2)), C([3, 1, 4, 1])))
 
