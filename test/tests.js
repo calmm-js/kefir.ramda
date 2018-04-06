@@ -61,4 +61,10 @@ describe('Lifted Ramda', () => {
       R.range(0, C(100))
     )
   )
+
+  testEq(true, () =>
+    R.apply(R.both(R.complement(R.isNil), R.startsWith(C('foo'))), [
+      C('foobar')
+    ])
+  )
 })
