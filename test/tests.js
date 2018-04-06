@@ -27,7 +27,7 @@ const testEq = (expect, thunk) =>
   it(`${toExpr(thunk)} => ${show(expect)}`, done => {
     const actual = thunk()
     function check(actual) {
-      if (!R.equals(actual, expect))
+      if (true !== R.equals(actual, expect))
         throw new Error(`Expected: ${show(expect)}, actual: ${show(actual)}`)
       done()
     }
