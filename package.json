@@ -1,6 +1,6 @@
 {
   "name": "kefir.ramda",
-  "version": "0.25.0-alpha.2",
+  "version": "0.25.0",
   "description": "Ramda functions lifted to work on Kefir properties",
   "module": "dist/kefir.ramda.es.js",
   "main": "dist/kefir.ramda.cjs.js",
@@ -11,7 +11,7 @@
     "dist:umd": "    NODE_ENV=dev        rollup -c -n kefir.ramda -i src/kefir.ramda.js -f umd -o dist/kefir.ramda.js",
     "dist:umd.min": "NODE_ENV=production rollup -c -n kefir.ramda -i src/kefir.ramda.js -f umd -o dist/kefir.ramda.min.js",
     "lint": "eslint src test",
-    "prepare": "npm run lint && npm run dist && npm run test",
+    "prepare": "node scripts/generate.js && npm run lint && npm run dist && npm run test",
     "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "test": "nyc mocha",
     "watch": "concurrently \"npm run watch:dist\" \"npm run watch:test\"",

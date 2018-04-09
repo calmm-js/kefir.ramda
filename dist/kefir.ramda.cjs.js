@@ -5,6 +5,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var R = require('ramda');
 var kefir_combines = require('kefir.combines');
 
+// THIS FILE IS GENERATED
+
 var F = /*#__PURE__*/kefir_combines.liftRec(R.F);
 var T = /*#__PURE__*/kefir_combines.liftRec(R.T);
 var __ = /*#__PURE__*/kefir_combines.liftRec(R.__);

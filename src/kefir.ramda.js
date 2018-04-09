@@ -1,3 +1,5 @@
+// THIS FILE IS GENERATED
+
 import * as R from 'ramda'
 import {liftRec} from 'kefir.combines'
 
