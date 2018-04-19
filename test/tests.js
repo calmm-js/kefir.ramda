@@ -67,4 +67,6 @@ describe('Lifted Ramda', () => {
       C('foobar')
     ])
   )
+
+  testEq(3, () => R.apply(R.curry((x, y) => x + y)(C(1)), [C(2)]))
 })
