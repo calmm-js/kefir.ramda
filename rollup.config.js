@@ -3,16 +3,18 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 import replace from 'rollup-plugin-replace'
 import uglify from 'rollup-plugin-uglify'
 
+const globals = {
+  infestines: 'I',
+  kefir: 'Kefir',
+  'kefir.combines': 'kefir.combines',
+  ramda: 'R'
+}
+
 const build = ({NODE_ENV, format, suffix}) => ({
-  external: ['infestines', 'kefir', 'kefir.combines', 'ramda'],
+  external: Object.keys(globals),
   input: 'src/kefir.ramda.js',
   output: {
-    globals: {
-      infestines: 'I',
-      kefir: 'Kefir',
-      'kefir.combines': 'kefir.combines',
-      ramda: 'R'
-    },
+    globals,
     name: 'kefir.ramda',
     format,
     file: `dist/kefir.ramda.${suffix}`
