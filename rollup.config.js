@@ -4,9 +4,9 @@ import replace from 'rollup-plugin-replace'
 import uglify from 'rollup-plugin-uglify'
 
 const globals = {
+  'karet.lift': 'karet.lift',
   infestines: 'I',
   kefir: 'Kefir',
-  'kefir.combines': 'kefir.combines',
   ramda: 'R'
 }
 
