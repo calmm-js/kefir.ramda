@@ -7,11 +7,11 @@ fs.writeFileSync(
   `// THIS FILE IS GENERATED
 
 import * as R from 'ramda'
-import {liftRec} from 'kefir.combines'
+import * as K from 'karet.lift'
 
 ${Object.keys(R)
     .sort()
-    .map(name => `export const ${name} = liftRec(R.${name})`)
+    .map(name => `export const ${name} = K.liftRec(R.${name})`)
     .join('\n')}
 `
 )
