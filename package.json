@@ -1,6 +1,6 @@
 {
   "name": "kefir.ramda",
-  "version": "0.25.1",
+  "version": "0.25.2",
   "description": "Ramda functions lifted to work on Kefir properties",
   "module": "dist/kefir.ramda.es.js",
   "main": "dist/kefir.ramda.cjs.js",
