@@ -34,13 +34,44 @@ export const clone = K.lift(R.clone)
 export const comparator = K.liftRec(R.comparator)
 export const complement = K.liftRec(R.complement)
 export const compose = K.liftRec(R.compose)
-export const composeK = K.liftRec(R.composeK)
-export const composeP = K.liftRec(R.composeP)
+export const composeK = K.liftRec(
+  process.env.NODE_ENV === 'production'
+    ? R.composeK
+    : function composeK() {
+        if (!composeK.warned) {
+          composeK.warned = 1
+          console.warn("Warning: `composeK` has been deprecated in favor of `composeWith(chain)`.")
+        }
+        return R.composeK.apply(this, arguments)
+      }
+)
+export const composeP = K.liftRec(
+  process.env.NODE_ENV === 'production'
+    ? R.composeP
+    : function composeP() {
+        if (!composeP.warned) {
+          composeP.warned = 1
+          console.warn("Warning: `composeP` has been deprecated in favor of `composeWith(then)`.")
+        }
+        return R.composeP.apply(this, arguments)
+      }
+)
+export const composeWith = K.liftRec(R.composeWith)
 export const concat = K.lift(R.concat)
 export const cond = K.liftRec(R.cond)
 export const construct = K.liftRec(R.construct)
 export const constructN = K.liftRec(R.constructN)
-export const contains = K.lift(R.contains)
+export const contains = K.lift(
+  process.env.NODE_ENV === 'production'
+    ? R.contains
+    : function contains(_0, _1) {
+        if (!contains.warned) {
+          contains.warned = 1
+          console.warn("Warning: `contains` has been renamed to `includes`.")
+        }
+        return R.contains.apply(this, arguments)
+      }
+)
 export const converge = K.liftRec(R.converge)
 export const countBy = K.lift(R.countBy)
 export const curry = K.liftRec(R.curry)
@@ -82,11 +113,13 @@ export const gt = K.lift(R.gt)
 export const gte = K.lift(R.gte)
 export const has = K.lift(R.has)
 export const hasIn = K.lift(R.hasIn)
+export const hasPath = K.lift(R.hasPath)
 export const head = K.lift(R.head)
 export const identical = K.lift(R.identical)
 export const identity = K.lift(R.identity)
 export const ifElse = K.liftRec(R.ifElse)
 export const inc = K.lift(R.inc)
+export const includes = K.lift(R.includes)
 export const indexBy = K.lift(R.indexBy)
 export const indexOf = K.lift(R.indexOf)
 export const init = K.lift(R.init)
@@ -127,14 +160,25 @@ export const max = K.lift(R.max)
 export const maxBy = K.lift(R.maxBy)
 export const mean = K.lift(R.mean)
 export const median = K.lift(R.median)
-export const memoize = K.liftRec(R.memoize)
 export const memoizeWith = K.liftRec(R.memoizeWith)
-export const merge = K.liftRec(R.merge)
+export const merge = K.lift(
+  process.env.NODE_ENV === 'production'
+    ? R.merge
+    : function merge(_0, _1) {
+        if (!merge.warned) {
+          merge.warned = 1
+          console.warn("Warning: `merge` has been deprecated in favor of new `mergeRight`.")
+        }
+        return R.merge.apply(this, arguments)
+      }
+)
 export const mergeAll = K.lift(R.mergeAll)
 export const mergeDeepLeft = K.lift(R.mergeDeepLeft)
 export const mergeDeepRight = K.lift(R.mergeDeepRight)
 export const mergeDeepWith = K.lift(R.mergeDeepWith)
 export const mergeDeepWithKey = K.lift(R.mergeDeepWithKey)
+export const mergeLeft = K.lift(R.mergeLeft)
+export const mergeRight = K.lift(R.mergeRight)
 export const mergeWith = K.lift(R.mergeWith)
 export const mergeWithKey = K.lift(R.mergeWithKey)
 export const min = K.lift(R.min)
@@ -153,6 +197,7 @@ export const of = K.lift(R.of)
 export const omit = K.lift(R.omit)
 export const once = K.liftRec(R.once)
 export const or = K.lift(R.or)
+export const otherwise = K.lift(R.otherwise)
 export const over = K.lift(R.over)
 export const pair = K.lift(R.pair)
 export const partial = K.liftRec(R.partial)
@@ -166,8 +211,29 @@ export const pick = K.lift(R.pick)
 export const pickAll = K.lift(R.pickAll)
 export const pickBy = K.lift(R.pickBy)
 export const pipe = K.liftRec(R.pipe)
-export const pipeK = K.liftRec(R.pipeK)
-export const pipeP = K.liftRec(R.pipeP)
+export const pipeK = K.liftRec(
+  process.env.NODE_ENV === 'production'
+    ? R.pipeK
+    : function pipeK() {
+        if (!pipeK.warned) {
+          pipeK.warned = 1
+          console.warn("Warning: `pipeK` has been deprecated in favor of `pipeWith(chain)`.")
+        }
+        return R.pipeK.apply(this, arguments)
+      }
+)
+export const pipeP = K.liftRec(
+  process.env.NODE_ENV === 'production'
+    ? R.pipeP
+    : function pipeP() {
+        if (!pipeP.warned) {
+          pipeP.warned = 1
+          console.warn("Warning: `pipeP` has been deprecated in favor of `pipeWith(then)`.")
+        }
+        return R.pipeP.apply(this, arguments)
+      }
+)
+export const pipeWith = K.liftRec(R.pipeWith)
 export const pluck = K.lift(R.pluck)
 export const prepend = K.lift(R.prepend)
 export const product = K.lift(R.product)
@@ -212,6 +278,8 @@ export const takeLastWhile = K.lift(R.takeLastWhile)
 export const takeWhile = K.lift(R.takeWhile)
 export const tap = K.lift(R.tap)
 export const test = K.lift(R.test)
+export const then = K.lift(R.then)
+export const thunkify = K.liftRec(R.thunkify)
 export const times = K.lift(R.times)
 export const toLower = K.lift(R.toLower)
 export const toPairs = K.lift(R.toPairs)

@@ -1,6 +1,6 @@
 {
   "name": "kefir.ramda",
-  "version": "0.25.6",
+  "version": "0.26.0",
   "description": "Ramda functions lifted to work on Kefir properties",
   "module": "dist/kefir.ramda.es.js",
   "main": "dist/kefir.ramda.cjs.js",
@@ -42,20 +42,20 @@
     "babel-register": "^6.26.0",
     "codecov": "^3.1.0",
     "concurrently": "^4.0.1",
-    "eslint": "^5.6.1",
+    "eslint": "^5.9.0",
     "kefir": "^3.8.5",
     "mocha": "^5.2.0",
-    "nyc": "^13.0.1",
-    "rollup": "^0.66.2",
+    "nyc": "^13.1.0",
+    "rollup": "^0.67.3",
     "rollup-plugin-babel": "^3.0.7",
     "rollup-plugin-node-resolve": "^3.4.0",
-    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-uglify": "^6.0.0",
     "watch-run": "^1.2.5"
   },
   "dependencies": {
     "karet.lift": "^2.1.0",
-    "ramda": "^0.25.0"
+    "ramda": "^0.26.0"
   },
   "peerDependencies": {
     "kefir": "^3.7.0"

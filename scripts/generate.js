@@ -1,5 +1,6 @@
 const fs = require('fs')
 
+const I = require('infestines')
 const R = require('ramda')
 
 const needsLiftRec = new Map(
@@ -35,13 +36,28 @@ const needsLiftRec = new Map(
     comparator: {needs: 1, arity: 1},
     complement: {needs: 1, arity: 1},
     compose: {needs: 1, arity: 0},
-    composeK: {needs: 1, arity: 0},
-    composeP: {needs: 1, arity: 0},
+    composeK: {
+      needs: 1,
+      arity: 0,
+      deprecated:
+        'Warning: `composeK` has been deprecated in favor of `composeWith(chain)`.'
+    },
+    composeP: {
+      needs: 1,
+      arity: 0,
+      deprecated:
+        'Warning: `composeP` has been deprecated in favor of `composeWith(then)`.'
+    },
+    composeWith: {needs: 1, arity: 2},
     concat: {needs: 0, arity: 2},
     cond: {needs: 1, arity: 1},
     construct: {needs: 1, arity: 1},
     constructN: {needs: 1, arity: 2},
-    contains: {needs: 0, arity: 2},
+    contains: {
+      needs: 0,
+      arity: 2,
+      deprecated: 'Warning: `contains` has been renamed to `includes`.'
+    },
     converge: {needs: 1, arity: 2},
     countBy: {needs: 0, arity: 2},
     curry: {needs: 1, arity: 1},
@@ -83,11 +99,13 @@ const needsLiftRec = new Map(
     gte: {needs: 0, arity: 2},
     has: {needs: 0, arity: 2},
     hasIn: {needs: 0, arity: 2},
+    hasPath: {needs: 0, arity: 2},
     head: {needs: 0, arity: 1},
     identical: {needs: 0, arity: 2},
     identity: {needs: 0, arity: 1},
     ifElse: {needs: 1, arity: 3},
     inc: {needs: 0, arity: 1},
+    includes: {needs: 0, arity: 2},
     indexBy: {needs: 0, arity: 2},
     indexOf: {needs: 0, arity: 2},
     init: {needs: 0, arity: 1},
@@ -128,14 +146,20 @@ const needsLiftRec = new Map(
     maxBy: {needs: 0, arity: 3},
     mean: {needs: 0, arity: 1},
     median: {needs: 0, arity: 1},
-    memoize: {needs: 1, arity: 1},
     memoizeWith: {needs: 1, arity: 2},
-    merge: {needs: 1, arity: 2},
+    merge: {
+      needs: 0,
+      arity: 2,
+      deprecated:
+        'Warning: `merge` has been deprecated in favor of new `mergeRight`.'
+    },
     mergeAll: {needs: 0, arity: 1},
     mergeDeepLeft: {needs: 0, arity: 2},
     mergeDeepRight: {needs: 0, arity: 2},
     mergeDeepWith: {needs: 0, arity: 3},
     mergeDeepWithKey: {needs: 0, arity: 3},
+    mergeLeft: {needs: 0, arity: 2},
+    mergeRight: {needs: 0, arity: 2},
     mergeWith: {needs: 0, arity: 3},
     mergeWithKey: {needs: 0, arity: 3},
     min: {needs: 0, arity: 2},
@@ -154,6 +178,7 @@ const needsLiftRec = new Map(
     omit: {needs: 0, arity: 2},
     once: {needs: 1, arity: 1},
     or: {needs: 0, arity: 2},
+    otherwise: {needs: 0, arity: 2},
     over: {needs: 0, arity: 3},
     pair: {needs: 0, arity: 2},
     partial: {needs: 1, arity: 2},
@@ -167,8 +192,19 @@ const needsLiftRec = new Map(
     pickAll: {needs: 0, arity: 2},
     pickBy: {needs: 0, arity: 2},
     pipe: {needs: 1, arity: 0},
-    pipeK: {needs: 1, arity: 0},
-    pipeP: {needs: 1, arity: 0},
+    pipeK: {
+      needs: 1,
+      arity: 0,
+      deprecated:
+        'Warning: `pipeK` has been deprecated in favor of `pipeWith(chain)`.'
+    },
+    pipeP: {
+      needs: 1,
+      arity: 0,
+      deprecated:
+        'Warning: `pipeP` has been deprecated in favor of `pipeWith(then)`.'
+    },
+    pipeWith: {needs: 1, arity: 2},
     pluck: {needs: 0, arity: 2},
     prepend: {needs: 0, arity: 2},
     product: {needs: 0, arity: 1},
@@ -213,6 +249,8 @@ const needsLiftRec = new Map(
     takeWhile: {needs: 0, arity: 2},
     tap: {needs: 0, arity: 2},
     test: {needs: 0, arity: 2},
+    then: {needs: 0, arity: 2},
+    thunkify: {needs: 1, arity: 1},
     times: {needs: 0, arity: 2},
     toLower: {needs: 0, arity: 1},
     toPairs: {needs: 0, arity: 1},
@@ -275,7 +313,25 @@ ${Object.entries(R)
           `Arity mismatch '${name}': ${rec.arity} !== ${value.length}`
         )
 
-      return `export const ${name} = K.lift${rec.needs ? 'Rec' : ''}(R.${name})`
+      const body = rec.deprecated
+        ? `
+  process.env.NODE_ENV === 'production'
+    ? R.${name}
+    : function ${name}(${I.seq(
+            R.range(0, rec.arity),
+            R.map(x => '_' + x),
+            R.join(', ')
+          )}) {
+        if (!${name}.warned) {
+          ${name}.warned = 1
+          console.warn(${JSON.stringify(rec.deprecated)})
+        }
+        return R.${name}.apply(this, arguments)
+      }
+`
+        : `R.${name}`
+
+      return `export const ${name} = K.lift${rec.needs ? 'Rec' : ''}(${body})`
     })
     .join('\n')}
 `

@@ -37,13 +37,32 @@ var clone = /*#__PURE__*/K.lift(R.clone);
 var comparator = /*#__PURE__*/K.liftRec(R.comparator);
 var complement = /*#__PURE__*/K.liftRec(R.complement);
 var compose = /*#__PURE__*/K.liftRec(R.compose);
-var composeK = /*#__PURE__*/K.liftRec(R.composeK);
-var composeP = /*#__PURE__*/K.liftRec(R.composeP);
+var composeK = /*#__PURE__*/K.liftRec(process.env.NODE_ENV === 'production' ? R.composeK : function composeK() {
+  if (!composeK.warned) {
+    composeK.warned = 1;
+    console.warn("Warning: `composeK` has been deprecated in favor of `composeWith(chain)`.");
+  }
+  return R.composeK.apply(this, arguments);
+});
+var composeP = /*#__PURE__*/K.liftRec(process.env.NODE_ENV === 'production' ? R.composeP : function composeP() {
+  if (!composeP.warned) {
+    composeP.warned = 1;
+    console.warn("Warning: `composeP` has been deprecated in favor of `composeWith(then)`.");
+  }
+  return R.composeP.apply(this, arguments);
+});
+var composeWith = /*#__PURE__*/K.liftRec(R.composeWith);
 var concat = /*#__PURE__*/K.lift(R.concat);
 var cond = /*#__PURE__*/K.liftRec(R.cond);
 var construct = /*#__PURE__*/K.liftRec(R.construct);
 var constructN = /*#__PURE__*/K.liftRec(R.constructN);
-var contains = /*#__PURE__*/K.lift(R.contains);
+var contains = /*#__PURE__*/K.lift(process.env.NODE_ENV === 'production' ? R.contains : function contains(_0, _1) {
+  if (!contains.warned) {
+    contains.warned = 1;
+    console.warn("Warning: `contains` has been renamed to `includes`.");
+  }
+  return R.contains.apply(this, arguments);
+});
 var converge = /*#__PURE__*/K.liftRec(R.converge);
 var countBy = /*#__PURE__*/K.lift(R.countBy);
 var curry = /*#__PURE__*/K.liftRec(R.curry);
@@ -85,11 +104,13 @@ var gt = /*#__PURE__*/K.lift(R.gt);
 var gte = /*#__PURE__*/K.lift(R.gte);
 var has = /*#__PURE__*/K.lift(R.has);
 var hasIn = /*#__PURE__*/K.lift(R.hasIn);
+var hasPath = /*#__PURE__*/K.lift(R.hasPath);
 var head = /*#__PURE__*/K.lift(R.head);
 var identical = /*#__PURE__*/K.lift(R.identical);
 var identity = /*#__PURE__*/K.lift(R.identity);
 var ifElse = /*#__PURE__*/K.liftRec(R.ifElse);
 var inc = /*#__PURE__*/K.lift(R.inc);
+var includes = /*#__PURE__*/K.lift(R.includes);
 var indexBy = /*#__PURE__*/K.lift(R.indexBy);
 var indexOf = /*#__PURE__*/K.lift(R.indexOf);
 var init = /*#__PURE__*/K.lift(R.init);
@@ -130,14 +151,21 @@ var max = /*#__PURE__*/K.lift(R.max);
 var maxBy = /*#__PURE__*/K.lift(R.maxBy);
 var mean = /*#__PURE__*/K.lift(R.mean);
 var median = /*#__PURE__*/K.lift(R.median);
-var memoize = /*#__PURE__*/K.liftRec(R.memoize);
 var memoizeWith = /*#__PURE__*/K.liftRec(R.memoizeWith);
-var merge = /*#__PURE__*/K.liftRec(R.merge);
+var merge = /*#__PURE__*/K.lift(process.env.NODE_ENV === 'production' ? R.merge : function merge(_0, _1) {
+  if (!merge.warned) {
+    merge.warned = 1;
+    console.warn("Warning: `merge` has been deprecated in favor of new `mergeRight`.");
+  }
+  return R.merge.apply(this, arguments);
+});
 var mergeAll = /*#__PURE__*/K.lift(R.mergeAll);
 var mergeDeepLeft = /*#__PURE__*/K.lift(R.mergeDeepLeft);
 var mergeDeepRight = /*#__PURE__*/K.lift(R.mergeDeepRight);
 var mergeDeepWith = /*#__PURE__*/K.lift(R.mergeDeepWith);
 var mergeDeepWithKey = /*#__PURE__*/K.lift(R.mergeDeepWithKey);
+var mergeLeft = /*#__PURE__*/K.lift(R.mergeLeft);
+var mergeRight = /*#__PURE__*/K.lift(R.mergeRight);
 var mergeWith = /*#__PURE__*/K.lift(R.mergeWith);
 var mergeWithKey = /*#__PURE__*/K.lift(R.mergeWithKey);
 var min = /*#__PURE__*/K.lift(R.min);
@@ -156,6 +184,7 @@ var of = /*#__PURE__*/K.lift(R.of);
 var omit = /*#__PURE__*/K.lift(R.omit);
 var once = /*#__PURE__*/K.liftRec(R.once);
 var or = /*#__PURE__*/K.lift(R.or);
+var otherwise = /*#__PURE__*/K.lift(R.otherwise);
 var over = /*#__PURE__*/K.lift(R.over);
 var pair = /*#__PURE__*/K.lift(R.pair);
 var partial = /*#__PURE__*/K.liftRec(R.partial);
@@ -169,8 +198,21 @@ var pick = /*#__PURE__*/K.lift(R.pick);
 var pickAll = /*#__PURE__*/K.lift(R.pickAll);
 var pickBy = /*#__PURE__*/K.lift(R.pickBy);
 var pipe = /*#__PURE__*/K.liftRec(R.pipe);
-var pipeK = /*#__PURE__*/K.liftRec(R.pipeK);
-var pipeP = /*#__PURE__*/K.liftRec(R.pipeP);
+var pipeK = /*#__PURE__*/K.liftRec(process.env.NODE_ENV === 'production' ? R.pipeK : function pipeK() {
+  if (!pipeK.warned) {
+    pipeK.warned = 1;
+    console.warn("Warning: `pipeK` has been deprecated in favor of `pipeWith(chain)`.");
+  }
+  return R.pipeK.apply(this, arguments);
+});
+var pipeP = /*#__PURE__*/K.liftRec(process.env.NODE_ENV === 'production' ? R.pipeP : function pipeP() {
+  if (!pipeP.warned) {
+    pipeP.warned = 1;
+    console.warn("Warning: `pipeP` has been deprecated in favor of `pipeWith(then)`.");
+  }
+  return R.pipeP.apply(this, arguments);
+});
+var pipeWith = /*#__PURE__*/K.liftRec(R.pipeWith);
 var pluck = /*#__PURE__*/K.lift(R.pluck);
 var prepend = /*#__PURE__*/K.lift(R.prepend);
 var product = /*#__PURE__*/K.lift(R.product);
@@ -215,6 +257,8 @@ var takeLastWhile = /*#__PURE__*/K.lift(R.takeLastWhile);
 var takeWhile = /*#__PURE__*/K.lift(R.takeWhile);
 var tap = /*#__PURE__*/K.lift(R.tap);
 var test = /*#__PURE__*/K.lift(R.test);
+var then = /*#__PURE__*/K.lift(R.then);
+var thunkify = /*#__PURE__*/K.liftRec(R.thunkify);
 var times = /*#__PURE__*/K.lift(R.times);
 var toLower = /*#__PURE__*/K.lift(R.toLower);
 var toPairs = /*#__PURE__*/K.lift(R.toPairs);
@@ -286,6 +330,7 @@ exports.complement = complement;
 exports.compose = compose;
 exports.composeK = composeK;
 exports.composeP = composeP;
+exports.composeWith = composeWith;
 exports.concat = concat;
 exports.cond = cond;
 exports.construct = construct;
@@ -332,11 +377,13 @@ exports.gt = gt;
 exports.gte = gte;
 exports.has = has;
 exports.hasIn = hasIn;
+exports.hasPath = hasPath;
 exports.head = head;
 exports.identical = identical;
 exports.identity = identity;
 exports.ifElse = ifElse;
 exports.inc = inc;
+exports.includes = includes;
 exports.indexBy = indexBy;
 exports.indexOf = indexOf;
 exports.init = init;
@@ -377,7 +424,6 @@ exports.max = max;
 exports.maxBy = maxBy;
 exports.mean = mean;
 exports.median = median;
-exports.memoize = memoize;
 exports.memoizeWith = memoizeWith;
 exports.merge = merge;
 exports.mergeAll = mergeAll;
@@ -385,6 +431,8 @@ exports.mergeDeepLeft = mergeDeepLeft;
 exports.mergeDeepRight = mergeDeepRight;
 exports.mergeDeepWith = mergeDeepWith;
 exports.mergeDeepWithKey = mergeDeepWithKey;
+exports.mergeLeft = mergeLeft;
+exports.mergeRight = mergeRight;
 exports.mergeWith = mergeWith;
 exports.mergeWithKey = mergeWithKey;
 exports.min = min;
@@ -403,6 +451,7 @@ exports.of = of;
 exports.omit = omit;
 exports.once = once;
 exports.or = or;
+exports.otherwise = otherwise;
 exports.over = over;
 exports.pair = pair;
 exports.partial = partial;
@@ -418,6 +467,7 @@ exports.pickBy = pickBy;
 exports.pipe = pipe;
 exports.pipeK = pipeK;
 exports.pipeP = pipeP;
+exports.pipeWith = pipeWith;
 exports.pluck = pluck;
 exports.prepend = prepend;
 exports.product = product;
@@ -462,6 +512,8 @@ exports.takeLastWhile = takeLastWhile;
 exports.takeWhile = takeWhile;
 exports.tap = tap;
 exports.test = test;
+exports.then = then;
+exports.thunkify = thunkify;
 exports.times = times;
 exports.toLower = toLower;
 exports.toPairs = toPairs;
