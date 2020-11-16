@@ -15,6 +15,7 @@
   var allPass = /*#__PURE__*/K.liftRec(R.allPass);
   var always = /*#__PURE__*/K.liftRec(R.always);
   var and = /*#__PURE__*/K.lift(R.and);
+  var andThen = /*#__PURE__*/K.lift(R.andThen);
   var any = /*#__PURE__*/K.lift(R.any);
   var anyPass = /*#__PURE__*/K.liftRec(R.anyPass);
   var ap = /*#__PURE__*/K.lift(R.ap);
@@ -170,6 +171,7 @@
   var min = /*#__PURE__*/K.lift(R.min);
   var minBy = /*#__PURE__*/K.lift(R.minBy);
   var modulo = /*#__PURE__*/K.lift(R.modulo);
+  var move = /*#__PURE__*/K.lift(R.move);
   var multiply = /*#__PURE__*/K.lift(R.multiply);
   var nAry = /*#__PURE__*/K.liftRec(R.nAry);
   var negate = /*#__PURE__*/K.lift(R.negate);
@@ -193,6 +195,7 @@
   var pathEq = /*#__PURE__*/K.lift(R.pathEq);
   var pathOr = /*#__PURE__*/K.lift(R.pathOr);
   var pathSatisfies = /*#__PURE__*/K.lift(R.pathSatisfies);
+  var paths = /*#__PURE__*/K.lift(R.paths);
   var pick = /*#__PURE__*/K.lift(R.pick);
   var pickAll = /*#__PURE__*/K.lift(R.pickAll);
   var pickBy = /*#__PURE__*/K.lift(R.pickBy);
@@ -256,7 +259,6 @@
   var takeWhile = /*#__PURE__*/K.lift(R.takeWhile);
   var tap = /*#__PURE__*/K.lift(R.tap);
   var test = /*#__PURE__*/K.lift(R.test);
-  var then = /*#__PURE__*/K.lift(R.then);
   var thunkify = /*#__PURE__*/K.liftRec(R.thunkify);
   var times = /*#__PURE__*/K.lift(R.times);
   var toLower = /*#__PURE__*/K.lift(R.toLower);
@@ -291,6 +293,7 @@
   var where = /*#__PURE__*/K.lift(R.where);
   var whereEq = /*#__PURE__*/K.lift(R.whereEq);
   var without = /*#__PURE__*/K.lift(R.without);
+  var xor = /*#__PURE__*/K.lift(R.xor);
   var xprod = /*#__PURE__*/K.lift(R.xprod);
   var zip = /*#__PURE__*/K.lift(R.zip);
   var zipObj = /*#__PURE__*/K.lift(R.zipObj);
@@ -306,6 +309,7 @@
   exports.allPass = allPass;
   exports.always = always;
   exports.and = and;
+  exports.andThen = andThen;
   exports.any = any;
   exports.anyPass = anyPass;
   exports.ap = ap;
@@ -437,6 +441,7 @@
   exports.min = min;
   exports.minBy = minBy;
   exports.modulo = modulo;
+  exports.move = move;
   exports.multiply = multiply;
   exports.nAry = nAry;
   exports.negate = negate;
@@ -460,6 +465,7 @@
   exports.pathEq = pathEq;
   exports.pathOr = pathOr;
   exports.pathSatisfies = pathSatisfies;
+  exports.paths = paths;
   exports.pick = pick;
   exports.pickAll = pickAll;
   exports.pickBy = pickBy;
@@ -511,7 +517,6 @@
   exports.takeWhile = takeWhile;
   exports.tap = tap;
   exports.test = test;
-  exports.then = then;
   exports.thunkify = thunkify;
   exports.times = times;
   exports.toLower = toLower;
@@ -546,6 +551,7 @@
   exports.where = where;
   exports.whereEq = whereEq;
   exports.without = without;
+  exports.xor = xor;
   exports.xprod = xprod;
   exports.zip = zip;
   exports.zipObj = zipObj;
